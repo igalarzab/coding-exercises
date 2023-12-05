@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 
+import argparse
 import logging
-import sys
 import os
 import re
+import sys
+import timeit
 
 
 logging.basicConfig(level=os.environ.get('LOG_LEVEL', 'INFO').upper())
 
 
-def solve_1(problem_input: list[str]) -> int:
-    "Solves the first part of the problem"
+def solve_part1(problem_input: list[str]) -> int:
     result = 0
 
     for line in problem_input:
@@ -26,8 +27,7 @@ def solve_1(problem_input: list[str]) -> int:
     return result
 
 
-def solve_2(problem_input: list[str]) -> int:
-    "Solves the second part of the problem"
+def solve_part2(problem_input: list[str]) -> int:
     values = {
         'one': '1',
         'two': '2',
@@ -45,13 +45,12 @@ def solve_2(problem_input: list[str]) -> int:
 
     for line in problem_input:
         logging.debug(line.strip())
-
         digits = regex.findall(line)
-        logging.debug(digits)
 
         if len(digits) == 0:
             continue
 
+        # Transform alpha numbers to real numbers if needed
         first_value = digits[0] if digits[0].isdigit() else values[digits[0]]
         last_value = digits[-1] if digits[-1].isdigit() else values[digits[-1]]
 
@@ -62,15 +61,18 @@ def solve_2(problem_input: list[str]) -> int:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print(f'Usage: {sys.argv[0]} [--part1|--part2]')
-        sys.exit(1)
+    parser = argparse.ArgumentParser(prog='Programming Exercise Runner')
 
-    match sys.argv[1]:
-        case '--part1':
-            print(solve_1(sys.stdin.readlines()))
-        case '--part2':
-            print(solve_2(sys.stdin.readlines()))
-        case invalid_value:
-            print(f'Invalid part: {invalid_value}')
-            sys.exit(2)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--part1', action='store_const', dest='fn', const=solve_part1)
+    group.add_argument('--part2', action='store_const', dest='fn', const=solve_part2)
+    group.add_argument('--benchmark', nargs='?', type=int, const=1)
+
+    args = parser.parse_args()
+
+    if args.fn:
+        print(args.fn(sys.stdin.readlines()))
+    elif args.benchmark:
+        stdin = sys.stdin.readlines()
+        print('Part 1: %fs' % timeit.timeit(lambda: solve_part1(stdin), number=args.benchmark))
+        print('Part 2: %fs' % timeit.timeit(lambda: solve_part2(stdin), number=args.benchmark))

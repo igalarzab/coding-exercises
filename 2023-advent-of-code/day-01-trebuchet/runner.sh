@@ -11,3 +11,6 @@ cat input-01.txt | ./solution.py --part2 | diff output-01-part2.txt - && echo "O
 
 echo "--------- Running input-02 (part 2) ---------"
 cat input-02.txt | ./solution.py --part2 | diff output-02-part2.txt - && echo "OK"
+
+echo "----------------- Benchmark -----------------"
+cat input-02.txt | ./solution.py --benchmark
