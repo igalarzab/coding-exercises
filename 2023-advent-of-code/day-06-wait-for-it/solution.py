@@ -12,9 +12,11 @@ logging.basicConfig(level=os.environ.get('LOG_LEVEL', 'INFO').upper())
 
 
 def solve_part1(problem_input: list[str]) -> int:
-    times = map(int, problem_input[0].split()[1:])
-    distances = map(int, problem_input[1].split()[1:])
+    times = [int(t) for t in problem_input[0].split()[1:]]
+    distances = [int(d) for d in problem_input[1].split()[1:]]
     result = []
+
+    logging.debug(f'times={times}, distances={distances}')
 
     for time, distance in zip(times, distances):
         options_to_win = 0
@@ -25,19 +27,23 @@ def solve_part1(problem_input: list[str]) -> int:
 
         result.append(options_to_win)
 
+    logging.debug(f'result={result}')
     return math.prod(result)
 
 
+# FIXME: It takes 2s, there is probably a better way of solving it
 def solve_part2(problem_input: list[str]) -> int:
     time = int(problem_input[0][len('Time:'):].replace(' ', ''))
     distance = int(problem_input[1][len('Distance:'):].replace(' ', ''))
 
+    logging.debug(f'time={time}, distance={distance}')
     options_to_win = 0
 
     for i in range(1, time):
         if (time - i) * i > distance:
             options_to_win += 1
 
+    logging.debug(f'options_to_win={options_to_win}')
     return options_to_win
 
 

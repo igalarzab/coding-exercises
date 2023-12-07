@@ -89,7 +89,7 @@ def solve_part1(problem_input: list[str]) -> int:
     return min(locations)
 
 
-# FIXME: Too slow, takes 1h in resolve, find a better way
+# FIXME: It's too slow, it takes 1h to resolve
 def solve_part2(problem_input: list[str]) -> int:
     parsed = parse_input(problem_input)
     locations = []
