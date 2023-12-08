@@ -1,5 +1,7 @@
 # Day 4: Scratchcards
 
+https://adventofcode.com/2023/day/4
+
 ## Part 1
 
 ### Problem

@@ -1,5 +1,7 @@
 # Day 5: If You Give A Seed A Fertilizer
 
+https://adventofcode.com/2023/day/5
+
 ## Part 1
 
 ### Problem
@@ -79,7 +81,7 @@ Consider again the example seed-to-soil map:
 
 ```
 50 98 2
-52 50 48 
+52 50 48
 ```
 
 The first line has a destination range start of 50, a source range start of 98, and a range length of

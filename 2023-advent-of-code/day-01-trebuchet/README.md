@@ -1,5 +1,7 @@
 # Day 1: Trebuchet
 
+https://adventofcode.com/2023/day/1
+
 ## Part 1
 
 ### Problem
@@ -31,9 +33,9 @@ and the last digit (in that order) to form a single two-digit number.
 This is the input:
 
 ```
-1abc2 
-pqr3stu8vwx 
-a1b2c3d4e5f 
+1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
 treb7uchet
 ```
 
